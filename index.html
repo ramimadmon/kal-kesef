@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="קל-כסף: מחשבון ריבית דריבית שמראה איך חיסכון קטן הופך לסכום גדול.">
+  <title>קל-כסף - מחשבון ריבית דריבית</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/calculator.js"></script>
+  <script defer src="js/chart-data.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">קל-כסף</h1>
+      <p class="tagline">תזיזו את המחוונים ותראו כמה הכסף שלכם יכול לגדול עם הזמן.</p>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="card results-card" aria-labelledby="results-title">
+      <h2 id="results-title" class="card-title">התוצאה שלך</h2>
+      <div class="results">
+        <p class="hero-label" id="fv-label">כמה יהיה לך בעוד <bdi id="fv-years">20</bdi> <span id="fv-years-unit">שנים</span></p>
+        <p class="hero-value" aria-live="polite" aria-atomic="true"><bdi id="fv-value"></bdi></p>
+        <div class="tiles">
+          <div class="tile tile-deposits">
+            <p class="tile-label">כמה הפקדת</p>
+            <p class="tile-value"><bdi id="deposits-value"></bdi></p>
+          </div>
+          <div class="tile tile-profit">
+            <p class="tile-label">כמה הכסף הרוויח לבד</p>
+            <p class="tile-value"><bdi id="profit-value"></bdi></p>
+          </div>
+        </div>
+      </div>
+      <p class="results-note">המספרים להמחשה בלבד, אינם מובטחים ואינם ייעוץ השקעות. <a href="#disclaimer">לפרטים</a></p>
+    </section>
+
+    <section class="card inputs-card" aria-labelledby="inputs-title">
+      <h2 id="inputs-title" class="card-title">מה אתם חוסכים?</h2>
+
+      <div class="input-row" data-input="initial" data-unit="₪">
+        <label class="input-label" id="initial-label" for="initial-number">סכום התחלתי</label>
+        <p class="input-help" id="initial-help">כמה כסף יש לכם לשים כבר היום</p>
+        <div class="input-controls">
+          <input class="slider" type="range" id="initial-range" aria-labelledby="initial-label" aria-describedby="initial-help">
+          <span class="number-wrap">
+            <input class="number" type="text" inputmode="decimal" id="initial-number" dir="ltr" autocomplete="off" aria-describedby="initial-help initial-msg">
+            <span class="unit" aria-hidden="true">₪</span>
+          </span>
+        </div>
+        <p class="input-msg" id="initial-msg" hidden></p>
+      </div>
+
+      <div class="input-row" data-input="monthly" data-unit="₪">
+        <label class="input-label" id="monthly-label" for="monthly-number">הפקדה חודשית</label>
+        <p class="input-help" id="monthly-help">כמה תוסיפו בכל חודש</p>
+        <div class="input-controls">
+          <input class="slider" type="range" id="monthly-range" aria-labelledby="monthly-label" aria-describedby="monthly-help">
+          <span class="number-wrap">
+            <input class="number" type="text" inputmode="decimal" id="monthly-number" dir="ltr" autocomplete="off" aria-describedby="monthly-help monthly-msg">
+            <span class="unit" aria-hidden="true">₪</span>
+          </span>
+        </div>
+        <p class="input-msg" id="monthly-msg" hidden></p>
+      </div>
+
+      <div class="input-row" data-input="years" data-unit="שנים">
+        <label class="input-label" id="years-label" for="years-number">תקופת החיסכון</label>
+        <p class="input-help" id="years-help">כמה שנים הכסף יישאר בחיסכון</p>
+        <div class="input-controls">
+          <input class="slider" type="range" id="years-range" aria-labelledby="years-label" aria-describedby="years-help">
+          <span class="number-wrap">
+            <input class="number" type="text" inputmode="numeric" id="years-number" dir="ltr" autocomplete="off" aria-describedby="years-help years-msg">
+            <span class="unit" aria-hidden="true">שנים</span>
+          </span>
+        </div>
+        <p class="input-msg" id="years-msg" hidden></p>
+      </div>
+
+      <div class="input-row" data-input="annualRatePct" data-unit="%">
+        <label class="input-label" id="annualRatePct-label" for="annualRatePct-number">תשואה שנתית</label>
+        <p class="input-help" id="annualRatePct-help">בכמה אחוזים הכסף גדל בשנה, בממוצע</p>
+        <div class="input-controls">
+          <input class="slider" type="range" id="annualRatePct-range" aria-labelledby="annualRatePct-label" aria-describedby="annualRatePct-help">
+          <span class="number-wrap">
+            <input class="number" type="text" inputmode="decimal" id="annualRatePct-number" dir="ltr" autocomplete="off" aria-describedby="annualRatePct-help annualRatePct-msg">
+            <span class="unit" aria-hidden="true">%</span>
+          </span>
+        </div>
+        <p class="input-msg" id="annualRatePct-msg" hidden></p>
+      </div>
+    </section>
+
+    <section class="card chart-card" aria-labelledby="chart-title">
+      <h2 id="chart-title" class="card-title">איך הכסף גדל לאורך השנים</h2>
+      <div class="chart-wrap is-loading" id="chart-wrap">
+        <canvas id="growth-chart" role="img" aria-label="גרף עמודות לפי שנה: בכל עמודה ההפקדות שלך למטה והרווח מעליהן"></canvas>
+      </div>
+      <p class="chart-fallback" id="chart-fallback" hidden>לא הצלחנו לטעון את הגרף, אבל כל המספרים למעלה מעודכנים.</p>
+    </section>
+
+    <aside class="disclaimer" id="disclaimer" aria-label="הבהרה">
+      <svg class="disclaimer-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+      <p>המחשבון נועד להמחשה בלבד. התשואה אינה מובטחת, החישוב אינו כולל אינפלציה, מסים ודמי ניהול, ואינו מהווה ייעוץ השקעות.</p>
+    </aside>
+  </main>
+</body>
+</html>
