@@ -8,7 +8,15 @@ Two phases only (user requirement). User's "Phase 1" = Phase 0 here; user's "Pha
 | Phase | Name | Status |
 |---|---|---|
 | 0 | Working calculator with designed UI | Closed 2026-10-27 - Approved with conditions (shraga/reviews/phase-0-review.md) |
-| 1 | Growth chart, Vercel deployment and launch check | Next - carries Phase 0 conditions C1-C5 |
+| 1 | Growth chart, Vercel deployment and launch check | Closed 2026-10-27 - Approved with conditions (shraga/reviews/phase-1-review.md). Production: https://kal-kesef-beige.vercel.app/ |
+
+Project status: COMPLETE (all planned phases closed, user confirmed 2026-10-27). PHASE.md stays at 1 because no further phase exists.
+
+## Known issues after launch (Minor, not scheduled)
+- K1 (Phase 1 V6) Hero future value wraps at 320-375px only for extreme 11-digit results (all inputs at max).
+- K2 (Phase 1 V3) Real-phone regression browser names/versions and the Firefox console were not recorded.
+- K3 (Phase 1 V1) Public GitHub repo exposes planning docs and the commit email - accepted by the user
+  (2026-10-27): repo stays public as-is. Tolerated risk; no secrets in the repo. Never commit secrets here.
 
 ## Conditions carried from Phase 0 (must be closed in Phase 1)
 - C1 (V1) Stat-tile values of 7+ digits wrap the ₪ sign at 360-639px. Fix: stack tiles below 480px and keep value + ₪ on one line (DESIGN_SYSTEM.md v1.1, user decision).
@@ -104,3 +112,5 @@ Out of scope: analytics, custom domain (unless the user asks), sharing links, PW
 | 2026-10-27 | Phase 0 closed (Approved with conditions, user confirmed). Conditions C1-C5 moved into Phase 1. Adopted Phase 0 implementation deviations: Intl `minimumFractionDigits: 0`; years rounded to whole numbers; non-numeric error shown while typing (empty on blur); number fields `type="text"` + inputmode + `dir="ltr"`; mobile stat-tile inline padding 8px; optional insight line dropped; lint search is case-sensitive. |
 | 2026-10-27 | C1 decided by user: stat tiles stack below 480px (DESIGN_SYSTEM.md v1.1). |
 | 2026-10-27 | Deployment method decided by user: GitHub -> Vercel Git import (closes R7 decision). |
+| 2026-10-27 | Phase 1 closed (Approved with conditions, user confirmed); conditions C1-C5 closed; evidence committed (02c78fa). Adopted Phase 1 deviations: Chart.js injected by js/app.js after first render (same URL, SRI, crossorigin); stat tiles use a wrapping flex layout from 480px; stricter CSP (img-src 'self', connect-src 'none', form-action 'none'); .vercelignore also excludes .claude/, CLAUDE.md, *.txt, *.zip; new tests/chart-data.test.js and --chart-* tokens. Project complete. |
+| 2026-10-27 | K3 decided by user: GitHub repo stays public with current contents and commit email (accepted risk). |

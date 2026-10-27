@@ -1,6 +1,6 @@
 # Cal-Kesef - Architecture & Product Requirements
 
-Version: 1.3   Date: 2026-10-27   Build tool: Claude Code
+Version: 1.4   Date: 2026-10-27   Status: Launched - https://kal-kesef-beige.vercel.app/   Build tool: Claude Code
 Verified against: OWASP Top 10:2025, OWASP ASVS 5.0 (harness references), 2026-10-27
 Word copy: `shraga/Cal-Kesef-PRD.docx` (generated from this file; this file is the source of truth)
 
@@ -75,7 +75,7 @@ Numeric fields accept any value in range; out-of-range values are clamped on blu
 | Database | None | No persistence by requirement |
 | Auth | None | No accounts by requirement |
 | Storage | None | - |
-| Charting (Phase 1) | Chart.js 4.x, exact version pinned, loaded from cdnjs with SRI | Mature, accessible tooltips, touch support, one script tag |
+| Charting (Phase 1) | Chart.js 4.5.1, exact version pinned, loaded from cdnjs with SRI + crossorigin, injected by `js/app.js` after the first render | Mature, accessible tooltips, touch support; dynamic load keeps results independent of the CDN |
 | Fonts | Google Fonts, Rubik (400/500/700, Hebrew + Latin) | Modern Hebrew typography |
 | Hosting | Vercel, static site (no framework preset) | Free tier, HTTPS, headers via `vercel.json` |
 | Testing | Browser test page `tests/index.html` with a minimal assert helper; manual QA script | Node.js is not installed on the build machine; zero-install testing |
@@ -166,3 +166,4 @@ Two phases only (user requirement). Details in Plan.md.
 | 1.1 | 2026-10-27 | Design direction approved (mint + purple, Rubik); DESIGN_SYSTEM.md created; results card above inputs on mobile. |
 | 1.2 | 2026-10-27 | Plan.md created. Classic scripts with a global namespace instead of ES modules (Node.js and Python not installed; app and tests must run from file://). |
 | 1.3 | 2026-10-27 | Phase 0 closed. Deployment method decided: GitHub repository -> Vercel Git import. Stat tiles stack below 480px (DESIGN_SYSTEM.md v1.1). |
+| 1.4 | 2026-10-27 | Phase 1 closed, product launched on Vercel. Chart.js 4.5.1 injected dynamically by app.js (same SRI/crossorigin). Stricter CSP adopted (adds img-src 'self', connect-src 'none', form-action 'none'). |

@@ -1,6 +1,6 @@
 # Design System - Cal-Kesef (קל-כסף)
 
-Version: 1.1 (1.1: stat tiles stack below 480px instead of 360px)
+Version: 1.2 (1.1: stat tiles stack below 480px instead of 360px; 1.2: wrapping flex tiles adopted from Phase 1)
 Last updated: 2026-10-27
 Status: Approved (color direction confirmed by user: mint green + purple, light background). Exact values are `(proposed)` and may be tuned in Phase 0 only within WCAG AA.
 
@@ -154,7 +154,7 @@ Durations: 150ms for hover/focus color changes; chart transitions 300ms ease-out
 
 | Breakpoint | Width | Behavior |
 |---|---|---|
-| Mobile | < 640px | Single column: header, results, inputs, chart, disclaimer. Stat tiles stacked below 480px, side by side from 480px. A formatted value plus ₪ never wraps inside a tile at any width (`white-space: nowrap` on the value). |
+| Mobile | < 640px | Single column: header, results, inputs, chart, disclaimer. Stat tiles stacked below 480px, side by side from 480px; tiles use a wrapping flex layout, so a tile whose value is wider than half the card (only extreme 11-digit results) moves to its own line. A formatted value plus ₪ never wraps inside a tile at any width (`white-space: nowrap` on the value). |
 | Tablet | 640-899px | Single column, wider cards, larger gutters. |
 | Desktop | >= 900px | Two columns: inputs card on the right (start), results card on the left, `position: sticky; top: 24px`. Chart and disclaimer full width below. |
 
